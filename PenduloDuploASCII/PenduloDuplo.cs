@@ -14,9 +14,6 @@ namespace PenduloDuplo
 
         double w1;
         double w2;
-        double accumulator;
-        double frameStart;
-        double currentTime;
         double O1 = 2.0 * pi / 2.0;
         double O2 = 2.0 * pi / 3.0;
 
@@ -40,8 +37,8 @@ namespace PenduloDuplo
                 }
             }
 
-            w1 = 0;
-            w2 = 0;
+            w1 = 0.0;
+            w2 = 0.0;
         }
 
         private void formulation()
@@ -78,8 +75,8 @@ namespace PenduloDuplo
                 }
             }
 
-            w1 *= 1;
-            w2 *= 1;
+            w1 *= 1.0;
+            w2 *= 1.0;
         }
 
         public void draw()
