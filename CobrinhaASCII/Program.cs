@@ -12,7 +12,6 @@
 
         public Point[] tail = new Point[100];
         public Point apple, snake;
-
         public int nTail, score, flag, i, j, k;
         public bool defeat;
         public char[,] camp = new char[WIDTH, HEIGHT];
@@ -21,11 +20,17 @@
         public void setup()
         {
             score = 0;
-            snake.x = (int)WIDTH / 2;
-            snake.y = (int)HEIGHT / 2;
+            snake = new Point
+            {
+                x = (int)WIDTH / 2,
+                y = (int)HEIGHT / 2
+            };
             defeat = false;
-            apple.x = r.Next(1, WIDTH - 1);
-            apple.y = r.Next(1, HEIGHT - 1);
+            apple = new Point
+            {
+                x = r.Next(1, WIDTH - 1),
+                y = r.Next(1, HEIGHT - 1)
+            };
         }
 
         public void clean()
@@ -42,6 +47,7 @@
                     {
                         camp[i, j] = ' ';
                     }
+
                     if (j == snake.y && i == snake.x)
                     {
                         camp[i, j] = '0';
@@ -109,20 +115,37 @@
         public void logic()
         {
             Point prev1, prev2;
-            prev1.x = tail[0].x;
-            prev1.y = tail[0].y;
-
-            tail[0].x = snake.x;
-            tail[0].y = snake.y;
-
-            for (k = 0; k < nTail; k++)
+            prev1 = new Point
             {
-                prev2.x = tail[k].x;
-                prev2.y = tail[k].y;
-                tail[k].x = prev1.x;
-                tail[k].y = prev1.y;
-                prev1.x = prev2.x;
-                prev1.y = prev2.y;
+                x = tail[0].x,
+                y = tail[0].y
+            };
+
+            tail[0] = new Point
+            {
+                x = snake.x,
+                y = snake.y
+            };
+
+            for (k = 1; k < nTail; k++)
+            {
+                prev2 = new Point
+                {
+                    x = tail[k].x,
+                    y = tail[k].y
+                };
+
+                tail[k] = new Point
+                {
+                    x = prev1.x,
+                    y = prev1.y
+                };
+
+                prev1 = new Point
+                {
+                    x = prev2.x,
+                    y = prev2.y
+                };
             }
 
             switch (flag)
@@ -151,14 +174,20 @@
             for (k = 0; k < nTail; k++)
             {
                 if (tail[k].x == snake.x && tail[k].y == snake.y)
+                {
                     defeat = true;
+                }
             }
 
             if (snake.x == apple.x && snake.y == apple.y)
             {
                 score += 10;
-                apple.x = r.Next(1, WIDTH - 1);
-                apple.y = r.Next(1, HEIGHT - 1);
+                apple = new Point
+                {
+                    x = r.Next(1, WIDTH - 1),
+                    y = r.Next(1, HEIGHT - 1)
+                };
+
                 nTail++;
             }
         }
