@@ -10,7 +10,7 @@
             PenduloDuplo p = new PenduloDuplo();
             while (true)
             {
-                Console.Clear();
+                Console.Write("\f\u001bc\x1b[3J");
                 p.draw();
             }
         }
